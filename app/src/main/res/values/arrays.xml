@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="languages">
+        <item>@string/string_norwegian</item>
+        <item>@string/string_german</item>
+    </string-array>
+</resources>

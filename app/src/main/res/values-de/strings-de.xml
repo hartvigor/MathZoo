@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">S306386mappe1hartvigor</string>
+
+    <string name="MainActivity_Spill">Spiele</string>
+    <string name="MainActivity_Statistic">Statistiken</string>
+    <string name="MainActivity_Preferences">Einstellungen</string>
+
+    <string name="string_exit">Abschließen</string>
+    <string name="string_cancell">Abbrechen</string>
+
+    <string name="string_language">Sprache</string>
+    <string name="string_german">Tysk</string>
+    <string name="string_norwegian">Norsk</string>
+</resources>
