@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">S306386mappe1hartvigor</string>
+
+    <string name="MainActivity_Spill">Spill</string>
+    <string name="MainActivity_Statistikk">Statestikk</string>
+    <string name="MainActivity_Preferanser">Preferanser</string>
+</resources>
