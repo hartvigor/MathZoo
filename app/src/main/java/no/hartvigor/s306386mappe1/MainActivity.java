@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         recreate();
     }
 
-    public void showPreferences(View v){
+    /*public void showPreferences(View v){
         Intent intent=new Intent(this,SetPreferencesActivity.class);
         startActivity(intent);
-    }
+    }*/
 
 }

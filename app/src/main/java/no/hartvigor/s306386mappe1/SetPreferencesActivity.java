@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+/*
 public class SetPreferencesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,3 +20,4 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
     }
 }
+*/
