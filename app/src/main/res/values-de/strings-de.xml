@@ -10,6 +10,6 @@
     <string name="string_cancell">Abbrechen</string>
 
     <string name="string_language">Sprache</string>
-    <string name="string_german">Tysk</string>
-    <string name="string_norwegian">Norsk</string>
+    <string name="string_german">Deutsch</string>
+    <string name="string_norwegian">Norwegish</string>
 </resources>

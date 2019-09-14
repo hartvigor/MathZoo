@@ -11,4 +11,6 @@
     <string name="string_language">Språk</string>
     <string name="string_german">Tysk</string>
     <string name="string_norwegian">Norsk</string>
+
+    <string name="number_of_questions">Antall Regnestykker</string>
 </resources>

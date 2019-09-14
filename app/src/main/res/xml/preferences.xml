@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
         <ListPreference
             android:key="languages"
             android:title="@string/string_language"
             android:entries="@array/languages"
+            android:entryValues="@array/languageCodes"
             />
 
+        <ListPreference
+            android:key="numberOfQuestions"
+            android:title="@string/number_of_questions"
+            android:entries="@array/numberOfQuestions"
+            android:entryValues="@array/numberOfQuestions"
+            />
 </PreferenceScreen>

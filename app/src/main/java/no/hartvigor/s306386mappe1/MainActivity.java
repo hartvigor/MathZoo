@@ -19,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void showPreferences(View v){
+        Intent intent=new Intent(this,SetPreferencesActivity.class);
+        startActivity(intent);
+    }
+/*  Kode for å bytte land med knapper
     public void settland(String landskode){
         Resources res=getResources();
         DisplayMetrics dm=res.getDisplayMetrics();
@@ -35,11 +40,5 @@ public class MainActivity extends AppCompatActivity {
     public void norsk(View v) {
         settland("no");
         recreate();
-    }
-
-    public void showPreferences(View v){
-        Intent intent=new Intent(this,PreferenceActivity.class);
-        startActivity(intent);
-    }
-
+    }*/
 }

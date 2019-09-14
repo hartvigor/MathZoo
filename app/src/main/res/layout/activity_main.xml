@@ -23,29 +23,26 @@
         android:id="@+id/btn_start_game"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="364dp"
         android:background="@drawable/sh_round_btn"
 
         android:text="@string/MainActivity_Spill"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65999997" />
 
     <Button
         android:id="@+id/btn_statistic"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="248dp"
         android:background="@drawable/sh_round_btn"
         android:text="@string/MainActivity_Statistic"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_game"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.834" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_game" />
 
     <Button
         android:id="@+id/btn_preferences"
@@ -58,12 +55,11 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.806"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.834" />
+        app:layout_constraintStart_toEndOf="@+id/btn_start_game"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_game" />
 
-    <Toolbar
+<!--    Toolbar med knapper for å endre språk
+        <Toolbar
         android:id="@+id/mintoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,8 +79,9 @@
             android:onClick="tysk"
             android:text="@string/string_german" />
     </Toolbar>
+-->
 
-    <!--
+    <!-- Meny for navigasjon ikke brukt
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
