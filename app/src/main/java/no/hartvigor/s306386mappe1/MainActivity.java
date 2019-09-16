@@ -19,10 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void startGameActivity(View v){
+        Intent intent=new Intent(this,GameActivity.class);
+        startActivity(intent);
+    }
+
     public void showPreferences(View v){
         Intent intent=new Intent(this,SetPreferencesActivity.class);
         startActivity(intent);
     }
+
+    public void showStatistic(View v){
+        Intent intent=new Intent(this,StatisticActivity.class);
+        startActivity(intent);
+    }
+
 /*  Kode for å bytte land med knapper
     public void settland(String landskode){
         Resources res=getResources();

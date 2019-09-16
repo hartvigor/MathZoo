@@ -1,4 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">MathZoo</string>
+
+    <string name="MainActivity_Spill">Spiele</string>
+    <string name="MainActivity_Statistic">Statistiken</string>
+    <string name="MainActivity_Preferences">Einstellungen</string>
+
+    <string name="string_exit">Abschließen</string>
+    <string name="string_cancell">Abbrechen</string>
+
+    <string name="string_language">Sprache</string>
+    <string name="string_german">Deutsch</string>
+    <string name="string_norwegian">Norwegish</string>
+
     <string name="number_of_questions">Anzahl der Berechnungen</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_statistic">StatisticActivity</string>
+    <string name="string_check_answer">Überprüfe die Antworten</string>
+    <string name="string_delete_button">Löschen</string>
+    <string name="string_number_eight">8</string>
+    <string name="string_number_five">5</string>
+    <string name="string_number_four">4</string>
+    <string name="string_number_nine">9</string>
+    <string name="string_number_one">1</string>
+    <string name="string_number_seven">7</string>
+    <string name="string_number_six">6</string>
+    <string name="string_number_three">3</string>
+    <string name="string_number_two">2</string>
+    <string name="string_number_zero">0</string>
 </resources>

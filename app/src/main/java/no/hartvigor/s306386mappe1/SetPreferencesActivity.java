@@ -4,14 +4,10 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
 
 import java.util.Locale;
 
@@ -26,12 +22,19 @@ public class SetPreferencesActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.registerOnSharedPreferenceChangeListener(myPreferenceListener);
     }
 
+    //method for changing language
     public void settland(String landskode){
         Resources res=getResources();
         DisplayMetrics dm=res.getDisplayMetrics();
@@ -40,14 +43,13 @@ public class SetPreferencesActivity extends AppCompatActivity {
         res.updateConfiguration(cf,dm);
     }
 
+    //listener for change in preferences activity
     SharedPreferences.OnSharedPreferenceChangeListener myPreferenceListener = (sharedPreferences, s) -> {
         Log.e("SharedPreferenceValue", s);
         String val = sharedPreferences.getString(s, "");
 
-        switch (s)
-        {
-            case "languages":
-            {
+        switch (s) {
+            case "languages": {
                 String langCode = sharedPreferences.getString(s, "no");
                 settland(langCode);
                 recreate();

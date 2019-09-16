@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,6 +24,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/sh_round_btn"
+        android:onClick="startGameActivity"
 
         android:text="@string/MainActivity_Spill"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,6 +40,8 @@
         android:background="@drawable/sh_round_btn"
         android:text="@string/MainActivity_Statistic"
         android:textSize="10sp"
+        android:onClick="showStatistic"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_start_game"
         app:layout_constraintStart_toStartOf="parent"
