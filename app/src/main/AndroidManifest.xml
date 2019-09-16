@@ -12,11 +12,15 @@
         <activity
             android:name=".StatisticActivity"
             android:label="@string/title_activity_statistic"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <activity
             android:name=".GameActivity"
             android:label="@string/title_activity_game"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".PreferenceActivity"></activity> -->
+            android:theme="@style/AppTheme.NoActionBar"
+            /> <!-- <activity android:name=".PreferenceActivity"></activity> -->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".SetPreferencesActivity"
             android:parentActivityName=".MainActivity" />
+
+
     </application>
 
 </manifest>

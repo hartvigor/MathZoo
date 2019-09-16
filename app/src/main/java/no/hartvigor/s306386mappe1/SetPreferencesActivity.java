@@ -58,6 +58,8 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
 
 
+
+
 /*
         Log.e("SharedPref VALUE", val);
         switch(val) {

@@ -9,7 +9,7 @@
             />
 
         <ListPreference
-            android:key="numberOfQuestions"
+            android:key="number_of_questions"
             android:title="@string/number_of_questions"
             android:entries="@array/numberOfQuestions"
             android:entryValues="@array/numberOfQuestions"

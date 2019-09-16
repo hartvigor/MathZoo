@@ -28,4 +28,6 @@
     <string name="string_number_three">3</string>
     <string name="string_number_two">2</string>
     <string name="string_number_zero">0</string>
+    <string name="string_wrong">False Antwort</string>
+    <string name="string_correct">Richtig!</string>
 </resources>
