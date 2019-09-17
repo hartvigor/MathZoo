@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -121,8 +122,7 @@ public class GameActivity extends AppCompatActivity {
          */
         int max = Integer.valueOf(desiredPreference);
 
-
-        //TextView txt_question = findViewById(R.id.editText_question);
+        ArrayList<GameItem> temp = new ArrayList<GameItem>();
 
         if(ql.length == qa.length){
             for(int i = 0; i < qa.length; i++){
@@ -155,19 +155,22 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void onCheckAnswer (){
-        //TextView Question = findViewById(R.id.game_math_question);
-        String Question = "1";
         gameItems.get(array_position).setAnswered(true);
+
 
         TextView Attempt = findViewById(R.id.game_answer_field);
         String current = Attempt.getText().toString();
 
 
-        if(Question.equals(current)){
-            Log.e("Melding.","R.string.string_correct");
+        if(gameItems.get(array_position).getAnswer().equals(current)){
+            Log.e("Melding.","Riktig svar");
+            Toast.makeText(this, getString(R.string.string_correct), Toast.LENGTH_SHORT).show();
+            nextQuestion();
         }
         else{
-            Log.e("Melding.", "R.string.string_wrong");
+            Log.e("Melding.", "Ikke riktig");
+            Toast.makeText(this, getString(R.string.string_wrong), Toast.LENGTH_SHORT).show();
+            nextQuestion();
         }
     }
 
