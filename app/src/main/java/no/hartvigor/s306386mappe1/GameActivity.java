@@ -25,7 +25,10 @@ import java.util.MissingResourceException;
 public class GameActivity extends AppCompatActivity {
 
     private ArrayList<GameItem> gameItems = new ArrayList<>();
-    private int array_position;
+    /**
+     * -1 fordi den ikke er tatt i bruk altså blir 0 ved bruk
+     */
+    private int array_position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +62,10 @@ public class GameActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         GameHolder Holder = new GameHolder(gameItems);
-        outState.putSerializable("Holder", Holder);
+        outState.putSerializable("holder", Holder);
         String currentAnswer = ((TextView)findViewById(R.id.game_answer_field)).getText().toString();
         outState.putString("currentAnswer", currentAnswer);
+        outState.putInt("position", array_position);
     }
 
     /**
@@ -71,8 +75,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if(savedInstanceState.containsKey("Holder")) {
-            GameHolder restoreHolder = (GameHolder) savedInstanceState.getSerializable("Holder");
+        if(savedInstanceState.containsKey("holder")) {
+            GameHolder restoreHolder = (GameHolder) savedInstanceState.getSerializable("holder");
             if (restoreHolder != null) {
                 gameItems = restoreHolder.getItems();
             }
@@ -80,6 +84,9 @@ public class GameActivity extends AppCompatActivity {
         if(savedInstanceState.containsKey("currentAnswer")){
             ((TextView)findViewById(R.id.game_answer_field)).setText(savedInstanceState.getString("currentAnswer"));
         }
+        if(savedInstanceState.containsKey("position"))
+            array_position = savedInstanceState.getInt("position");
+        restoreQuestion();
     }
 
     @Override
@@ -119,7 +126,7 @@ public class GameActivity extends AppCompatActivity {
 
         if(ql.length == qa.length){
             for(int i = 0; i < qa.length; i++){
-                gameItems.add(new GameItem(ql[i], qa[i]));
+                gameItems.add(new GameItem(i, ql[i], qa[i]));
                 if(gameItems.size() == max)
                     break;
             }
@@ -130,21 +137,28 @@ public class GameActivity extends AppCompatActivity {
         Log.e("Objekt listen", "Objetktet:"+ Arrays.toString(new ArrayList[]{gameItems}));
 
         Collections.shuffle(gameItems);
+        nextQuestion();
 
-        for(int i = 0; i < gameItems.size(); i++){
-            gameItems.get(i).setId(i+1);
-        }
-        //for()
-        //txt_question.setText();
+    }
+
+    /**
+     * calles ved gjennomoppretting av aktivitet(for eks horizontalt endring)
+     */
+    public void restoreQuestion() {
+
     }
 
     public void nextQuestion(){
-
+        array_position++;
+        ((TextView)findViewById(R.id.game_math_question)).setText(gameItems.get(array_position).getQuestion());
+        ((TextView)findViewById(R.id.game_answer_field)).setText("");
     }
 
     private void onCheckAnswer (){
         //TextView Question = findViewById(R.id.game_math_question);
         String Question = "1";
+        gameItems.get(array_position).setAnswered(true);
+
         TextView Attempt = findViewById(R.id.game_answer_field);
         String current = Attempt.getText().toString();
 

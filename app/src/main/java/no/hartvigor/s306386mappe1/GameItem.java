@@ -11,7 +11,8 @@ public class GameItem implements Serializable {
     private boolean correct;
     private long inputAnswer;
 
-    public GameItem(String question, String answer){
+    public GameItem(int Id, String question, String answer){
+        this.Id = Id;
         this.question = question;
         this.answer = answer;
     }
@@ -26,10 +27,6 @@ public class GameItem implements Serializable {
 
     public int getId() {
         return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
     }
 
     public boolean isAnswered() {
