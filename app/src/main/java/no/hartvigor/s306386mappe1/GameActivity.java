@@ -43,12 +43,56 @@ public class GameActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         /**
-         * starte metode for laging av spm
+         * starte metode for laging av spm. if spill er igang er ikke saveIS null
          */
-        createRandomMathQuestions();
+        if(savedInstanceState == null)
+            createRandomMathQuestions();
+
         keyboard_input_listener();
     }
 
+    /**
+     * Ved endring for eks horizontalt (config) lagres aktivit i objektet i en bundle(objekt)
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        GameHolder Holder = new GameHolder(gameItems);
+        outState.putSerializable("Holder", Holder);
+        String currentAnswer = ((TextView)findViewById(R.id.game_answer_field)).getText().toString();
+        outState.putString("currentAnswer", currentAnswer);
+    }
+
+    /**
+     * her hentes lagret fra onSaveIS og restores
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState.containsKey("Holder")) {
+            GameHolder restoreHolder = (GameHolder) savedInstanceState.getSerializable("Holder");
+            if (restoreHolder != null) {
+                gameItems = restoreHolder.getItems();
+            }
+        }
+        if(savedInstanceState.containsKey("currentAnswer")){
+            ((TextView)findViewById(R.id.game_answer_field)).setText(savedInstanceState.getString("currentAnswer"));
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        int conf = getResources().getConfiguration().orientation;
+        if (conf == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_game_horizontal);
+        } else if (conf == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_game);
+        }
+        keyboard_input_listener();
+    }
 
     /**
      * laging av spm
@@ -65,12 +109,13 @@ public class GameActivity extends AppCompatActivity {
          */
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String desiredPreference =  sharedPreferences.getString("number_of_questions", "5");
-
-        //gjør om string til tall
+        /**
+         * gjør string til int
+         */
         int max = Integer.valueOf(desiredPreference);
 
 
-        TextView txt_question = findViewById(R.id.editText_question);
+        //TextView txt_question = findViewById(R.id.editText_question);
 
         if(ql.length == qa.length){
             for(int i = 0; i < qa.length; i++){
@@ -86,23 +131,36 @@ public class GameActivity extends AppCompatActivity {
 
         Collections.shuffle(gameItems);
 
+        for(int i = 0; i < gameItems.size(); i++){
+            gameItems.get(i).setId(i+1);
+        }
         //for()
         //txt_question.setText();
     }
 
+    public void nextQuestion(){
 
-    public void onCheckAnswer (View v){
-        TextView Answer = findViewById(R.id.game_math_question);
+    }
+
+    private void onCheckAnswer (){
+        //TextView Question = findViewById(R.id.game_math_question);
+        String Question = "1";
         TextView Attempt = findViewById(R.id.game_answer_field);
+        String current = Attempt.getText().toString();
 
-        if(Attempt.equals(Answer)){
-            Answer.setText("@string/string_correct");
+
+        if(Question.equals(current)){
+            Log.e("Melding.","R.string.string_correct");
         }
         else{
-            Answer.setText("@string/string_wrong");
+            Log.e("Melding.", "R.string.string_wrong");
         }
     }
 
+
+    /**
+     * listener som aktiverer metode fra trykk på keyboard
+     */
     private void keyboard_input_listener(){
         findViewById(R.id.button_0).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_number_zero)));
         findViewById(R.id.button_1).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_number_one)));
@@ -114,28 +172,33 @@ public class GameActivity extends AppCompatActivity {
         findViewById(R.id.button_7).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_number_seven)));
         findViewById(R.id.button_8).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_number_eight)));
         findViewById(R.id.button_9).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_number_nine)));
-        findViewById(R.id.button_check_answer).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_check_answer)));
-        findViewById(R.id.button_delete).setOnClickListener(view -> keyboard_set_input(getString(R.string.string_delete_button)));
+        findViewById(R.id.button_check_answer).setOnClickListener(view -> onCheckAnswer());
+        findViewById(R.id.button_delete).setOnClickListener(view -> deleteInput());
     }
 
+    /**
+     * legger inn innput fra keybord og lager string av inputten
+     * @param v
+     */
     private void keyboard_set_input(String v){
         TextView Answer = findViewById(R.id.game_answer_field);
         Answer.append(v);
     }
 
-    /*velge tekst
-    public void onSubmitClick (View view){
-        TextView Answer = findViewById(R.id.Answer);
-        EditText Attempt = findViewById(R.id.Attempt);
-        int userAnswer = Integer.parseInt(Attempt.getText().toString());
-        if(userAnswer == value1+value2) {
-            Answer.setText("Correct!");
-
-        } else {
-            Answer.setText("Wrong, the correct answer was: " + (value1+value2));
+    /**
+     * fjerner siste bokstav fra input fra keyboard
+     */
+    private void deleteInput(){
+        TextView Answer = findViewById(R.id.game_answer_field);
+        if (Answer != null) {
+            String v = Answer.getText().toString();
+            if (v.length() > 0) {
+                v = v.substring(0, v.length() -1);
+                Answer.setText(v);
+            }
         }
+    }
 
-    }*/
 
     @Override
     public boolean onSupportNavigateUp() {
