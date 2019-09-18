@@ -1,11 +1,14 @@
 package no.hartvigor.s306386mappe1;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -126,9 +129,7 @@ public class GameActivity extends AppCompatActivity {
 
         if(ql.length == qa.length){
             for(int i = 0; i < qa.length; i++){
-                gameItems.add(new GameItem(i, ql[i], qa[i]));
-                if(gameItems.size() == max)
-                    break;
+                temp.add(new GameItem(i, ql[i], qa[i]));
             }
         }
         else{
@@ -137,6 +138,11 @@ public class GameActivity extends AppCompatActivity {
         Log.e("Objekt listen", "Objetktet:"+ Arrays.toString(new ArrayList[]{gameItems}));
 
         Collections.shuffle(gameItems);
+        for(GameItem item : temp){
+            gameItems.add(item);
+            if(gameItems.size() == max)
+                break;
+        }
         nextQuestion();
 
     }
@@ -145,7 +151,9 @@ public class GameActivity extends AppCompatActivity {
      * calles ved gjennomoppretting av aktivitet(for eks horizontalt endring)
      */
     public void restoreQuestion() {
+        GameItem restore = gameItems.get(array_position);
 
+        ((TextView)findViewById(R.id.game_math_question)).setText(restore.getQuestion());
     }
 
     public void nextQuestion(){
@@ -157,7 +165,6 @@ public class GameActivity extends AppCompatActivity {
     private void onCheckAnswer (){
         gameItems.get(array_position).setAnswered(true);
 
-
         TextView Attempt = findViewById(R.id.game_answer_field);
         String current = Attempt.getText().toString();
 
@@ -165,13 +172,25 @@ public class GameActivity extends AppCompatActivity {
         if(gameItems.get(array_position).getAnswer().equals(current)){
             Log.e("Melding.","Riktig svar");
             Toast.makeText(this, getString(R.string.string_correct), Toast.LENGTH_SHORT).show();
-            nextQuestion();
         }
         else{
             Log.e("Melding.", "Ikke riktig");
             Toast.makeText(this, getString(R.string.string_wrong), Toast.LENGTH_SHORT).show();
-            nextQuestion();
         }
+
+        if(gameItems.size()-1 == array_position && gameItems.get(array_position).isAnswered())
+            gameCompleted();
+        else
+            nextQuestion();
+
+    }
+
+    private void gameCompleted(){
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
+            finish();
+        });
+        adb.create().show();
     }
 
 

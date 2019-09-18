@@ -30,4 +30,6 @@
     <string name="string_number_zero">0</string>
     <string name="string_wrong">False Antwort</string>
     <string name="string_correct">Richtig!</string>
+    <string name="string_finished">Fertig</string>
+    <string name="string_new_game">Neues Spiel</string>
 </resources>

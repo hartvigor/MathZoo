@@ -11,6 +11,8 @@
     <string name="string_delete_button">Slett</string>
     <string name="string_correct">Riktig!</string>
     <string name="string_wrong">Ikke helt riktig</string>
+    <string name="string_finished">Ferdig</string>
+    <string name="string_new_game">Nytt spill</string>
 
     <string name="string_language">Språk</string>
     <string name="string_german">Tysk</string>
