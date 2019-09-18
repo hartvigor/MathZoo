@@ -24,6 +24,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.MissingResourceException;
 
 public class GameActivity extends AppCompatActivity {
@@ -34,15 +35,20 @@ public class GameActivity extends AppCompatActivity {
      */
     private int array_position = -1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_game);
+        /*
         int conf = getResources().getConfiguration().orientation;
+
         if (conf == Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_game_horizontal);
         } else if (conf == Configuration.ORIENTATION_PORTRAIT){
             setContentView(R.layout.activity_game);
-        }
+        }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +76,13 @@ public class GameActivity extends AppCompatActivity {
         String currentAnswer = ((TextView)findViewById(R.id.game_answer_field)).getText().toString();
         outState.putString("currentAnswer", currentAnswer);
         outState.putInt("position", array_position);
+
+        String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
+        Configuration config = getResources().getConfiguration();
+        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        config.locale = new Locale(language);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        super.onSaveInstanceState(outState);
     }
 
     /**
@@ -96,13 +109,15 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        int conf = getResources().getConfiguration().orientation;
-        if (conf == Configuration.ORIENTATION_LANDSCAPE) {
+        setContentView(R.layout.activity_game);
+        /*
+        ifint conf = getResources().getConfiguration().orientation;
+         (conf == Configuration.ORIENTATION_LANDSCAPE) {
             setContentView(R.layout.activity_game_horizontal);
         } else if (conf == Configuration.ORIENTATION_PORTRAIT){
             setContentView(R.layout.activity_game);
         }
-        keyboard_input_listener();
+        keyboard_input_listener();*/
     }
 
     /**
@@ -137,7 +152,7 @@ public class GameActivity extends AppCompatActivity {
         }
         Log.e("Objekt listen", "Objetktet:"+ Arrays.toString(new ArrayList[]{gameItems}));
 
-        Collections.shuffle(gameItems);
+        Collections.shuffle(temp);
         for(GameItem item : temp){
             gameItems.add(item);
             if(gameItems.size() == max)
@@ -171,6 +186,7 @@ public class GameActivity extends AppCompatActivity {
 
         if(gameItems.get(array_position).getAnswer().equals(current)){
             Log.e("Melding.","Riktig svar");
+            gameItems.get(array_position).setCorrect(true);
             Toast.makeText(this, getString(R.string.string_correct), Toast.LENGTH_SHORT).show();
         }
         else{
@@ -178,10 +194,10 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.string_wrong), Toast.LENGTH_SHORT).show();
         }
 
-        if(gameItems.size()-1 == array_position && gameItems.get(array_position).isAnswered())
-            gameCompleted();
-        else
-            nextQuestion();
+        if(gameItems.size()-1 == array_position && gameItems.get(array_position).isAnswered()){
+            gameCompleted();}
+        else{
+            nextQuestion();}
 
     }
 
@@ -189,6 +205,11 @@ public class GameActivity extends AppCompatActivity {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
             finish();
+        });
+        adb.setNegativeButton(getResources().getString(R.string.string_new_game), (dialogInterface, i) -> {
+            gameItems.clear();
+            array_position = -1;
+            createRandomMathQuestions();
         });
         adb.create().show();
     }
@@ -238,10 +259,19 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle(R.string.string_leaving_game);
+
+        adb.setPositiveButton(getResources().getString(R.string.string_exit), ((dialogInterface, i) -> {
+            finish();
+        }));
+
+        adb.setNegativeButton(getResources().getString(R.string.string_cancell), ((dialogInterface, i) -> {
+            dialogInterface.dismiss();
+        }));
+        adb.create().show();
         return super.onSupportNavigateUp();
     }
-
 
 }
 

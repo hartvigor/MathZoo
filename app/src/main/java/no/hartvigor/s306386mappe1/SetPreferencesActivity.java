@@ -56,29 +56,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 break;
             }
         }
-
-
-
-
-/*
-        Log.e("SharedPref VALUE", val);
-        switch(val) {
-            case "no": {
-                settland("no");
-                recreate();
-
-                // Launch Langauge manipulator
-                Log.i("National New", "Sexy time is now");
-                break;
-            }
-
-            case "de": {
-                settland("de");
-                recreate();
-            }
-        }
-*/
-
     };
 
     public static class PrefsFragment extends PreferenceFragment {
@@ -89,6 +66,19 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    Saves set language when rotation is changed
+    source: https://stackoverflow.com/questions/19919654/why-locale-settings-are-overriden-on-preferenceactivity-when-orientation-changes
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
+        Configuration config = getResources().getConfiguration();
+        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        config.locale = new Locale(language);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        super.onSaveInstanceState(outState);
+    }
 
 
 

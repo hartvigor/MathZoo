@@ -13,6 +13,7 @@
     <string name="string_wrong">Ikke helt riktig</string>
     <string name="string_finished">Ferdig</string>
     <string name="string_new_game">Nytt spill</string>
+    <string name="string_leaving_game">Forlate spill?</string>
 
     <string name="string_language">Språk</string>
     <string name="string_german">Tysk</string>

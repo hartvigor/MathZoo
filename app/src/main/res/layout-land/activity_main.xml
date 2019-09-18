@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175"
+        />
+
+
+    <Button
+        android:id="@+id/btn_start_game"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/sh_round_btn"
+        android:onClick="startGameActivity"
+
+        android:text="@string/MainActivity_Spill"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65999997" />
+
+    <Button
+        android:id="@+id/btn_statistic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/sh_round_btn"
+        android:text="@string/MainActivity_Statistic"
+        android:textSize="10sp"
+        android:onClick="showStatistic"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_start_game"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_game" />
+
+    <Button
+        android:id="@+id/btn_preferences"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/sh_round_btn"
+        android:onClick="showPreferences"
+        android:text="@string/MainActivity_Preferences"
+
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_start_game"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_game" />
+
+<!--    Toolbar med knapper for å endre språk
+        <Toolbar
+        android:id="@+id/mintoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        tools:layout_editor_absoluteX="-92dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="norsk"
+            android:text="@string/string_norwegian" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="tysk"
+            android:text="@string/string_german" />
+    </Toolbar>
+-->
+
+    <!-- Meny for navigasjon ikke brukt
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/main_bottomnavigationview"
+        tools:background="#f9d" />
+-->
+</androidx.constraintlayout.widget.ConstraintLayout>

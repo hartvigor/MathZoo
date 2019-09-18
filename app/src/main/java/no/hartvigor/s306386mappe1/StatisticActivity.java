@@ -1,5 +1,6 @@
 package no.hartvigor.s306386mappe1;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -8,7 +9,10 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.preference.PreferenceManager;
 import android.view.View;
+
+import java.util.Locale;
 
 public class StatisticActivity extends AppCompatActivity {
 
@@ -27,6 +31,16 @@ public class StatisticActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
+        Configuration config = getResources().getConfiguration();
+        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        config.locale = new Locale(language);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        super.onSaveInstanceState(outState);
     }
 
 }

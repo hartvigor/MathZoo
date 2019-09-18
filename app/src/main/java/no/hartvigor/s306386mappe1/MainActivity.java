@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 
@@ -34,22 +35,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-/*  Kode for å bytte land med knapper
-    public void settland(String landskode){
-        Resources res=getResources();
-        DisplayMetrics dm=res.getDisplayMetrics();
-        Configuration cf=res.getConfiguration();
-        cf.setLocale(new Locale(landskode));
-        res.updateConfiguration(cf,dm);
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
+        Configuration config = getResources().getConfiguration();
+        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        config.locale = new Locale(language);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        super.onSaveInstanceState(outState);
     }
 
-    public void tysk(View v) {
-        settland("de");
-        recreate();
-    }
-
-    public void norsk(View v) {
-        settland("no");
-        recreate();
-    }*/
 }
