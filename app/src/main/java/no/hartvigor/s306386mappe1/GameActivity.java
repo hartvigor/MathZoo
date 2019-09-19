@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
      * -1 fordi den ikke er tatt i bruk altså blir 0 ved bruk
      */
     private int array_position = -1;
+    private int score_number;
 
 
     @Override
@@ -76,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         String currentAnswer = ((TextView)findViewById(R.id.game_answer_field)).getText().toString();
         outState.putString("currentAnswer", currentAnswer);
         outState.putInt("position", array_position);
+        outState.putInt("score", score_number);
 
         String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
         Configuration config = getResources().getConfiguration();
@@ -101,8 +103,12 @@ public class GameActivity extends AppCompatActivity {
         if(savedInstanceState.containsKey("currentAnswer")){
             ((TextView)findViewById(R.id.game_answer_field)).setText(savedInstanceState.getString("currentAnswer"));
         }
-        if(savedInstanceState.containsKey("position"))
+        if(savedInstanceState.containsKey("position")){
             array_position = savedInstanceState.getInt("position");
+        }
+        if(savedInstanceState.containsKey("score")){
+            score_number = savedInstanceState.getInt("score");
+        }
         restoreQuestion();
     }
 
@@ -159,7 +165,15 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
         nextQuestion();
+    }
 
+    /**
+     * metode setter score i view
+     */
+    public void setScoreView(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        TextView setScoreView = findViewById(R.id.game_score_view);
+        setScoreView.setText(score_number + "/" + sharedPreferences.getString("number_of_questions", "5"));
     }
 
     /**
@@ -167,11 +181,12 @@ public class GameActivity extends AppCompatActivity {
      */
     public void restoreQuestion() {
         GameItem restore = gameItems.get(array_position);
-
+        setScoreView();
         ((TextView)findViewById(R.id.game_math_question)).setText(restore.getQuestion());
     }
 
     public void nextQuestion(){
+        setScoreView();
         array_position++;
         ((TextView)findViewById(R.id.game_math_question)).setText(gameItems.get(array_position).getQuestion());
         ((TextView)findViewById(R.id.game_answer_field)).setText("");
@@ -186,6 +201,7 @@ public class GameActivity extends AppCompatActivity {
 
         if(gameItems.get(array_position).getAnswer().equals(current)){
             Log.e("Melding.","Riktig svar");
+            score_number++;
             gameItems.get(array_position).setCorrect(true);
             Toast.makeText(this, getString(R.string.string_correct), Toast.LENGTH_SHORT).show();
         }
@@ -195,20 +211,27 @@ public class GameActivity extends AppCompatActivity {
         }
 
         if(gameItems.size()-1 == array_position && gameItems.get(array_position).isAnswered()){
-            gameCompleted();}
+            gameCompleted();
+        }
         else{
-            nextQuestion();}
+            nextQuestion();
+        }
 
     }
 
     private void gameCompleted(){
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("score", score_number);
+            editor.apply();
             finish();
         });
         adb.setNegativeButton(getResources().getString(R.string.string_new_game), (dialogInterface, i) -> {
             gameItems.clear();
             array_position = -1;
+            score_number = 0;
             createRandomMathQuestions();
         });
         adb.create().show();

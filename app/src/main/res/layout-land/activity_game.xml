@@ -35,11 +35,21 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/game_score_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="48dp"
+                tools:background="#FFEB3B"
+                android:padding="5dp"
+                tools:text="Score" />
+
+            <TextView
                 android:id="@+id/game_math_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_margin="50dp"
+                android:layout_margin="10dp"
                 android:layout_marginTop="48dp"
                 tools:background="#FFEB3B"
                 android:padding="5dp"
@@ -53,14 +63,19 @@
 
             <TextView
                 android:id="@+id/game_answer_field"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="48dp"
+                android:padding="5dp"
                 tools:background="#4CAF50"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:text="Her skrives svaret" />
+
+
         </LinearLayout>
 
 

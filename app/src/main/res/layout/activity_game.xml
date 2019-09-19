@@ -132,6 +132,18 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/game_score_view"
+        android:layout_width="187dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.182"
+        tools:text="Score" />
+
+    <TextView
         android:id="@+id/game_answer_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -159,6 +171,8 @@
         app:layout_constraintVertical_bias="0.439"
         tools:text="Her kommer regnestykket" />
 
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -168,6 +182,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
