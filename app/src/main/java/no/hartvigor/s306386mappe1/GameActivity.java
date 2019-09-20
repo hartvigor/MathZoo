@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
      */
     private int score_number;
     private int sum_correct_games;
-    private int sum_total_games;_
+    private int sum_total_games;
 
 
     @Override
@@ -48,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
 
+        /*
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -277,7 +278,7 @@ public class GameActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public void onBackPressed() {
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setTitle(R.string.string_leaving_game);
 
@@ -289,7 +290,6 @@ public class GameActivity extends AppCompatActivity {
             dialogInterface.dismiss();
         }));
         adb.create().show();
-        return super.onSupportNavigateUp();
     }
 
 }
