@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,8 +58,10 @@ public class GameActivity extends AppCompatActivity {
         /*
           starte metode for laging av spm. if spill er igang er ikke saveIS null
          */
-        if(savedInstanceState == null)
+        //Hvis ikke det er lagret spill i InstanceState lag nytt spill
+        if(savedInstanceState == null) {
             createRandomMathQuestions();
+        }
 
         keyboard_input_listener();
     }
@@ -124,21 +127,18 @@ public class GameActivity extends AppCompatActivity {
      * laging av spm
      */
     public void createRandomMathQuestions() {
+
+
+        //??
         String[] ql = getResources().getStringArray(R.array.math_questions);
         String[] qa = getResources().getStringArray(R.array.math_answers);
 
-        Log.e("array listen:", "arrayet"+ Arrays.toString(ql));
-        Log.e("array listen:", "arrayet"+ Arrays.toString(qa));
 
-        /**
-         * henting av valgt antall spm
-         */
+         //henting av valgt antall spm
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String desiredPreference =  sharedPreferences.getString("number_of_questions", "5");
 
-        /**
-         * gjør string til int
-         */
+        //Gjør string til int
         int max = Integer.valueOf(desiredPreference);
 
         ArrayList<GameItem> temp = new ArrayList<GameItem>();
@@ -181,6 +181,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void nextQuestion(){
+        //legge til i variabel for totalt spillte spill
+        sum_total_games++;
+
+
         setScoreView();
         array_position++;
         ((TextView)findViewById(R.id.game_math_question)).setText(gameItems.get(array_position).getQuestion());
@@ -197,7 +201,7 @@ public class GameActivity extends AppCompatActivity {
             Log.e("Melding.","Riktig svar");
             score_number++;
             gameItems.get(array_position).setCorrect(true);
-            Toast.makeText(this, getString(R.string.string_correct), Toast.LENGTH_SHORT).show();
+            toastHelper(getString(R.string.string_correct));
         }
         else{
             Log.e("Melding.", "Ikke riktig");
@@ -210,22 +214,50 @@ public class GameActivity extends AppCompatActivity {
         else{
             nextQuestion();
         }
+    }
+
+    //Hjelper for å plassere toast melding riktig posisjon på skjermen
+    private void toastHelper(String text_for_toast){
+        Toast correct_toast = Toast.makeText(this, text_for_toast, Toast.LENGTH_SHORT);
+        correct_toast.setGravity(Gravity.CENTER,0,-100);
+        correct_toast.show();
+    }
+
+    //ved avsluttning
+    private void statisticHelper(){
+        //sum_correct_games += score_number;
+        /**
+         * ved avslutting av spill lagres score i shared preferences
+         */
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Integer score_total_history =  sharedPreferences.getInt("score_total", 0);
+        Integer sum_total_history =  sharedPreferences.getInt("sum_total_games", 0);
+        score_total_history += score_number;
+        sum_total_history += sum_total_games;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //siste spill score
+        editor.putInt("score", score_number);
+        editor.apply();
+
+        //totalt riktig score
+        editor.putInt("score_total", score_total_history);
+        editor.apply();
+
+        //totalt antall spill
+        editor.putInt("sum_total_games", sum_total_history);
+        editor.apply();
 
     }
 
     private void gameCompleted(){
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
-            /**
-             * ved avslutting av spill lagres score i shared preferences
-             */
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("score", score_number);
-            editor.apply();
+            statisticHelper();
             finish();
         });
         adb.setNegativeButton(getResources().getString(R.string.string_new_game), (dialogInterface, i) -> {
+            sum_total_games++;
             gameItems.clear();
             array_position = -1;
             score_number = 0;
@@ -233,7 +265,6 @@ public class GameActivity extends AppCompatActivity {
         });
         adb.create().show();
     }
-
 
     /**
      * listener som aktiverer metode fra trykk på keyboard

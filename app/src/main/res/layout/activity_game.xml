@@ -20,19 +20,22 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_delete"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="75dp"
                 android:layout_weight="1"
-                android:text="@string/string_delete_button" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_left_arrow" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/button_check_answer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="75dp"
                 android:layout_weight="1"
-                android:text="@string/string_check_answer" />
+                android:scaleType="centerInside"
+                android:text="@string/string_check_answer"
+                app:srcCompat="@drawable/ic_checked" />
 
         </LinearLayout>
 
@@ -137,21 +140,23 @@
         android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.182"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
         tools:text="Score" />
 
     <TextView
         android:id="@+id/game_answer_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:background="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586"
+        tools:background="#4CAF50"
         tools:text="Her skrives svaret" />
 
     <TextView
@@ -170,17 +175,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.439"
         tools:text="Her kommer regnestykket" />
-
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

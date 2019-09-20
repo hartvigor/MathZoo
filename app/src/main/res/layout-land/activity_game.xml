@@ -94,19 +94,22 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_delete"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="75dp"
                     android:layout_weight="1"
-                    android:text="@string/string_delete_button" />
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_left_arrow" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/button_check_answer"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="75dp"
                     android:layout_weight="1"
-                    android:text="@string/string_check_answer" />
+                    android:scaleType="centerInside"
+                    android:text="@string/string_check_answer"
+                    app:srcCompat="@drawable/ic_checked" />
 
             </LinearLayout>
 

@@ -1,5 +1,6 @@
 package no.hartvigor.s306386mappe1;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -20,17 +22,19 @@ public class StatisticActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Integer score = sharedPreferences.getInt("score", 0);
+        Integer total_score = sharedPreferences.getInt("score_total", 0);
+        Integer total_games = sharedPreferences.getInt("sum_total_games", 0);
+
+        TextView setScoreView = findViewById(R.id.last_game_score_statistic);
+        setScoreView.setText(score + "/" + sharedPreferences.getString("number_of_questions", "0"));
+
+        TextView setTotalView = findViewById(R.id.total_score_statistic);
+        setTotalView.setText(total_score + "/" + total_games);
+
+        button_input_listener();
     }
 
     @Override
@@ -43,4 +47,15 @@ public class StatisticActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    public void clearStatistic() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.clear();
+        edit.commit();
+        recreate();
+    }
+
+    public void button_input_listener() {
+        findViewById(R.id.deleteStatistic).setOnClickListener(view -> clearStatistic());
+    }
 }
