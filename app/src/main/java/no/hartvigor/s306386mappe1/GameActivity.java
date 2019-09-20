@@ -39,8 +39,9 @@ public class GameActivity extends AppCompatActivity {
      * variabler for statestikk
      */
     private int score_number;
-    private int sum_correct_games;
     private int sum_total_games;
+    private int score_total_history;
+    private int sum_total_history;
 
 
     @Override
@@ -198,14 +199,12 @@ public class GameActivity extends AppCompatActivity {
         String current = Attempt.getText().toString();
 
         if(gameItems.get(array_position).getAnswer().equals(current)){
-            Log.e("Melding.","Riktig svar");
             score_number++;
             gameItems.get(array_position).setCorrect(true);
             toastHelper(getString(R.string.string_correct));
         }
         else{
-            Log.e("Melding.", "Ikke riktig");
-            Toast.makeText(this, getString(R.string.string_wrong), Toast.LENGTH_SHORT).show();
+            toastHelper(getString(R.string.string_wrong));
         }
 
         if(gameItems.size()-1 == array_position && gameItems.get(array_position).isAnswered()){
@@ -219,19 +218,27 @@ public class GameActivity extends AppCompatActivity {
     //Hjelper for å plassere toast melding riktig posisjon på skjermen
     private void toastHelper(String text_for_toast){
         Toast correct_toast = Toast.makeText(this, text_for_toast, Toast.LENGTH_SHORT);
-        correct_toast.setGravity(Gravity.CENTER,0,-100);
+
+        int orientation = getResources().getConfiguration().orientation;
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            correct_toast.setGravity(Gravity.CENTER,0,-100);
+        }
+        else{
+            correct_toast.setGravity(Gravity.CENTER,0,-100);
+        }
+
+
         correct_toast.show();
     }
 
     //ved avsluttning
     private void statisticHelper(){
-        //sum_correct_games += score_number;
         /**
          * ved avslutting av spill lagres score i shared preferences
          */
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Integer score_total_history =  sharedPreferences.getInt("score_total", 0);
-        Integer sum_total_history =  sharedPreferences.getInt("sum_total_games", 0);
+        score_total_history =  sharedPreferences.getInt("score_total", 0);
+        sum_total_history =  sharedPreferences.getInt("sum_total_games", 0);
         score_total_history += score_number;
         sum_total_history += sum_total_games;
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -252,6 +259,10 @@ public class GameActivity extends AppCompatActivity {
 
     private void gameCompleted(){
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
+
+        final View customLayout = getLayoutInflater().inflate(R.layout.game_activity_dialog_alert, null);
+        adb.setView(customLayout);
+
         adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
             statisticHelper();
             finish();
@@ -265,6 +276,8 @@ public class GameActivity extends AppCompatActivity {
         });
         adb.create().show();
     }
+
+
 
     /**
      * listener som aktiverer metode fra trykk på keyboard

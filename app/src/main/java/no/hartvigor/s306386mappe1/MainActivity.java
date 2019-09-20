@@ -28,19 +28,22 @@ public class MainActivity extends AppCompatActivity {
     public void showPreferences(View v){
         Intent intent=new Intent(this,SetPreferencesActivity.class);
         startActivity(intent);
+        //finish() for å avslutte slik ved endringer i preferences starter MainActivity aktiviteten på nytt
+        finish();
     }
 
     public void showStatistic(View v){
-        Intent intent=new Intent(this,StatisticActivity.class);
+        Intent intent = new Intent(this,StatisticActivity.class);
         startActivity(intent);
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
         Configuration config = getResources().getConfiguration();
-        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        if( language.equals("default") ){
+            language = Locale.getDefault().getLanguage();
+        }
         config.locale = new Locale(language);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
         super.onSaveInstanceState(outState);

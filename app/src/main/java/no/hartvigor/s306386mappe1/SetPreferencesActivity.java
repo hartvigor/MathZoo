@@ -1,5 +1,6 @@
 package no.hartvigor.s306386mappe1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -74,13 +75,19 @@ public class SetPreferencesActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");
         Configuration config = getResources().getConfiguration();
-        if( language.equals("default") ) language = Locale.getDefault().getLanguage();
+        if( language.equals("default") ){
+            language = Locale.getDefault().getLanguage();
+        }
         config.locale = new Locale(language);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
         super.onSaveInstanceState(outState);
     }
 
-
-
-
+    //starter MainActivity på nytt med nye preferences
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }

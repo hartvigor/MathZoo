@@ -9,7 +9,6 @@ public class GameItem implements Serializable {
 
     private boolean answered;
     private boolean correct;
-    private long inputAnswer;
 
     public GameItem(int Id, String question, String answer){
         this.Id = Id;
@@ -37,19 +36,9 @@ public class GameItem implements Serializable {
         this.answered = answered;
     }
 
-    public boolean isCorrect() {
-        return correct;
-    }
 
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
 
-    public long getInputAnswer() {
-        return inputAnswer;
-    }
-
-    public void setInputAnswer(long inputAnswer) {
-        this.inputAnswer = inputAnswer;
-    }
 }

@@ -35,4 +35,6 @@
     <string name="string_leaving_game">Spiele verlassen?</string>
     <string name="string_last_game_statistic">Letztes Spiel:</string>
     <string name="string_total_game_statistic">Gesamtpunktzahl:</string>
+    <string name="string_finished_dialog2">Du hast das Spiel beendet</string>
+    <string name="string_finished_dialog">Hurra!</string>
 </resources>

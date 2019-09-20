@@ -17,7 +17,8 @@
 
     <string name="string_last_game_statistic">Forrige spill:</string>
     <string name="string_total_game_statistic">Total score:</string>
-
+    <string name="string_finished_dialog">Hurra!</string>
+    <string name="string_finished_dialog2">Du fullførte spillet</string>
 
     <string name="string_language">Språk</string>
     <string name="string_german">Tysk</string>
