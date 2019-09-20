@@ -31,10 +31,15 @@ public class GameActivity extends AppCompatActivity {
 
     private ArrayList<GameItem> gameItems = new ArrayList<>();
     /**
-     * -1 fordi den ikke er tatt i bruk altså blir 0 ved bruk
+     * array_position -1 fordi den ikke er tatt i bruk altså blir 0 ved bruk
      */
     private int array_position = -1;
+    /**
+     * variabler for statestikk
+     */
     private int score_number;
+    private int sum_correct_games;
+    private int sum_total_games;_
 
 
     @Override
@@ -42,22 +47,14 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_game);
-        /*
-        int conf = getResources().getConfiguration().orientation;
-
-        if (conf == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_game_horizontal);
-        } else if (conf == Configuration.ORIENTATION_PORTRAIT){
-            setContentView(R.layout.activity_game);
-        }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        /**
-         * starte metode for laging av spm. if spill er igang er ikke saveIS null
+        /*
+          starte metode for laging av spm. if spill er igang er ikke saveIS null
          */
         if(savedInstanceState == null)
             createRandomMathQuestions();
@@ -100,15 +97,19 @@ public class GameActivity extends AppCompatActivity {
                 gameItems = restoreHolder.getItems();
             }
         }
+
         if(savedInstanceState.containsKey("currentAnswer")){
             ((TextView)findViewById(R.id.game_answer_field)).setText(savedInstanceState.getString("currentAnswer"));
         }
+
         if(savedInstanceState.containsKey("position")){
             array_position = savedInstanceState.getInt("position");
         }
+
         if(savedInstanceState.containsKey("score")){
             score_number = savedInstanceState.getInt("score");
         }
+
         restoreQuestion();
     }
 
@@ -116,14 +117,6 @@ public class GameActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setContentView(R.layout.activity_game);
-        /*
-        ifint conf = getResources().getConfiguration().orientation;
-         (conf == Configuration.ORIENTATION_LANDSCAPE) {
-            setContentView(R.layout.activity_game_horizontal);
-        } else if (conf == Configuration.ORIENTATION_PORTRAIT){
-            setContentView(R.layout.activity_game);
-        }
-        keyboard_input_listener();*/
     }
 
     /**
@@ -141,6 +134,7 @@ public class GameActivity extends AppCompatActivity {
          */
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String desiredPreference =  sharedPreferences.getString("number_of_questions", "5");
+
         /**
          * gjør string til int
          */
@@ -154,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }
         else{
-            throw new MissingResourceException("Resource Array Length is not the same size", "GameActivity", null);
+            throw new MissingResourceException("Length in Array not the same", "GameActivity", null);
         }
         Log.e("Objekt listen", "Objetktet:"+ Arrays.toString(new ArrayList[]{gameItems}));
 
@@ -198,7 +192,6 @@ public class GameActivity extends AppCompatActivity {
         TextView Attempt = findViewById(R.id.game_answer_field);
         String current = Attempt.getText().toString();
 
-
         if(gameItems.get(array_position).getAnswer().equals(current)){
             Log.e("Melding.","Riktig svar");
             score_number++;
@@ -222,6 +215,9 @@ public class GameActivity extends AppCompatActivity {
     private void gameCompleted(){
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
         adb.setPositiveButton(getResources().getString(R.string.string_finished), (dialogInterface, i) -> {
+            /**
+             * ved avslutting av spill lagres score i shared preferences
+             */
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("score", score_number);
