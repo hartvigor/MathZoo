@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".GameActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_game_landscape">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,56 +18,68 @@
         android:layout_alignParentStart="true"
         android:baselineAligned="false">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/game_score_view"
+            <!--<ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="48dp"
-                tools:background="#FFEB3B"
-                android:padding="5dp"
-                tools:text="Score" />
+                android:layout_height="66dp"
+                android:src="@drawable/ic_frame" />
+-->
+
 
             <TextView
                 android:id="@+id/game_math_question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:layout_alignParentTop="true"
                 android:layout_margin="10dp"
-                android:layout_marginTop="48dp"
-                tools:background="#FFEB3B"
-                android:padding="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.439"
+                app:layout_constraintVertical_bias="0.47000003"
                 tools:text="Her kommer regnestykket" />
 
             <TextView
                 android:id="@+id/game_answer_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="48dp"
-                android:padding="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:background="#4CAF50"
+                android:layout_margin="25dp"
+                android:fontFamily="casual"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/game_math_question"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="25dp"
                 tools:text="Her skrives svaret" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="5dp"
+                android:layerType="software"
+                android:src="@drawable/dotted_strings"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/game_answer_field"
+                app:layout_constraintVertical_bias="0.0" />
+
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="70dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageButton
                     android:id="@+id/button_delete"
@@ -88,8 +101,7 @@
             </LinearLayout>
 
 
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_gravity="bottom"
@@ -101,11 +113,40 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="200dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/scoreboard"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/game_score_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:fontFamily="casual"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    tools:text="0/5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
 
                 <Button
                     android:id="@+id/button_1"

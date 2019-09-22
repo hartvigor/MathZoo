@@ -134,30 +134,31 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/game_score_view"
-        android:layout_width="187dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
-        tools:text="Score" />
-
-    <TextView
-        android:id="@+id/game_answer_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!--<ImageView
+        android:layout_width="117dp"
+        android:layout_height="103dp"
+        android:src="@drawable/ic_frame"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.446"
+        app:layout_constraintHorizontal_bias="0.963"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.586"
-        tools:background="#4CAF50"
-        tools:text="Her skrives svaret" />
+        app:layout_constraintVertical_bias="0.0" />
+-->
+    <TextView
+        android:id="@+id/game_score_view"
+        android:layout_width="144dp"
+        android:layout_height="43dp"
+        android:fontFamily="casual"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071"
+        tools:text="Score" />
 
     <TextView
         android:id="@+id/game_math_question"
@@ -166,14 +167,44 @@
         android:layout_alignParentTop="true"
         android:layout_margin="50dp"
         android:layout_marginTop="48dp"
-        tools:background="#FFEB3B"
+        android:fontFamily="casual"
         android:padding="5dp"
+        android:textAlignment="center"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439"
+        app:layout_constraintVertical_bias="0.627"
+        tools:background="#FFEB3B"
         tools:text="Her kommer regnestykket" />
+
+    <TextView
+        android:id="@+id/game_answer_field"
+        android:layout_width="170dp"
+        android:layout_height="25dp"
+        android:fontFamily="casual"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836"
+        tools:background="#4CAF50"
+        tools:text="Her skrives svaret" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="170dp"
+        android:layout_height="5dp"
+        android:layerType="software"
+        android:src="@drawable/dotted_strings"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_answer_field"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,7 @@ public class StatisticActivity extends AppCompatActivity {
         Integer total_games = sharedPreferences.getInt("sum_total_games", 0);
 
         TextView setScoreView = findViewById(R.id.last_game_score_statistic);
-        setScoreView.setText(score + "/" + sharedPreferences.getString("number_of_questions", "0"));
+        setScoreView.setText(score + "/" + sharedPreferences.getString("number_of_questions", "5"));
 
         TextView setTotalView = findViewById(R.id.total_score_statistic);
         setTotalView.setText(total_score + "/" + total_games);

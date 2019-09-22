@@ -5,65 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".StatisticActivity">
+    tools:context=".StatisticActivity"
+    android:background="@drawable/background_statistic">
+
 
     <TextView
         android:id="@+id/last_game_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:padding="5dp"
         android:text="@string/string_last_game_statistic"
+        android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.479" />
 
     <TextView
         android:id="@+id/last_game_score_statistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="0/0"
+        android:fontFamily="casual"
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintVertical_bias="0.479"
+        tools:text="0/0" />
 
     <TextView
         android:id="@+id/total_score_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:padding="5dp"
         android:text="@string/string_total_game_statistic"
+        android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.297" />
+        app:layout_constraintVertical_bias="0.608" />
 
     <TextView
         android:id="@+id/total_score_statistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="0/0"
+        android:fontFamily="casual"
+        android:padding="5dp"
+        android:textAlignment="center"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
-
+        app:layout_constraintVertical_bias="0.608"
+        tools:text="0/0" />
 
     <ImageButton
         android:id="@+id/deleteStatistic"
         android:layout_width="100dp"
         android:layout_height="89dp"
+        android:background="@drawable/sh_round_btn"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93"
         app:srcCompat="@drawable/ic_delete_trash" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

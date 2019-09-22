@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -219,14 +220,23 @@ public class GameActivity extends AppCompatActivity {
     private void toastHelper(String text_for_toast){
         Toast correct_toast = Toast.makeText(this, text_for_toast, Toast.LENGTH_SHORT);
 
+        View toastStyle = correct_toast.getView();
+
+        if(text_for_toast.equals(getString(R.string.string_correct))){
+            toastStyle.setBackgroundResource(R.drawable.toast_styling);
+        }
+        else{
+            toastStyle.setBackgroundResource(R.drawable.toast_styling_alt);
+        }
+
         int orientation = getResources().getConfiguration().orientation;
+
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){
             correct_toast.setGravity(Gravity.CENTER,0,-100);
         }
         else{
             correct_toast.setGravity(Gravity.CENTER,0,-100);
         }
-
 
         correct_toast.show();
     }
@@ -258,6 +268,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void gameCompleted(){
+        setScoreView();
         AlertDialog.Builder adb = new AlertDialog.Builder(this);
 
         final View customLayout = getLayoutInflater().inflate(R.layout.game_activity_dialog_alert, null);
@@ -267,6 +278,7 @@ public class GameActivity extends AppCompatActivity {
             statisticHelper();
             finish();
         });
+
         adb.setNegativeButton(getResources().getString(R.string.string_new_game), (dialogInterface, i) -> {
             sum_total_games++;
             gameItems.clear();
@@ -274,6 +286,7 @@ public class GameActivity extends AppCompatActivity {
             score_number = 0;
             createRandomMathQuestions();
         });
+
         adb.create().show();
     }
 
