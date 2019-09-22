@@ -35,7 +35,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         sp.registerOnSharedPreferenceChangeListener(myPreferenceListener);
     }
 
-    //method for changing language
+    //metode for å endre språk
     public void settland(String landskode){
         Resources res=getResources();
         DisplayMetrics dm=res.getDisplayMetrics();
@@ -44,7 +44,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         res.updateConfiguration(cf,dm);
     }
 
-    //listener for change in preferences activity
+    //Følger med på om språk endres
     SharedPreferences.OnSharedPreferenceChangeListener myPreferenceListener = (sharedPreferences, s) -> {
         Log.e("SharedPreferenceValue", s);
         String val = sharedPreferences.getString(s, "");
@@ -67,10 +67,8 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    Saves set language when rotation is changed
-    source: https://stackoverflow.com/questions/19919654/why-locale-settings-are-overriden-on-preferenceactivity-when-orientation-changes
-     */
+
+    //Lagrer språk ved endring av orientasjon
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         String language = PreferenceManager.getDefaultSharedPreferences(this).getString("languages", "default");

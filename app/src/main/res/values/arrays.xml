@@ -13,11 +13,11 @@
     <string-array name="numberOfQuestions">
         <item>5</item>
         <item>10</item>
-        <item>20</item>
+        <item>25</item>
     </string-array>
 
 
-    <!-- Math problems-->
+    <!-- Matte spørsmål deretter svar-->
     <string-array name="math_questions">
         <item id="1">10 + 8</item>
         <item id="2">4 + 3</item>

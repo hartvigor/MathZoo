@@ -50,13 +50,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_game);
-
-        /*
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         /*
           starte metode for laging av spm. if spill er igang er ikke saveIS null
          */
@@ -232,10 +225,10 @@ public class GameActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
 
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            correct_toast.setGravity(Gravity.CENTER,0,-100);
+            correct_toast.setGravity(Gravity.CENTER,-200,10);
         }
         else{
-            correct_toast.setGravity(Gravity.CENTER,0,-100);
+            correct_toast.setGravity(Gravity.CENTER,0,-80);
         }
 
         correct_toast.show();
